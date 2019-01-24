@@ -82,7 +82,7 @@ resource "libvirt_domain" "domain" {
   provisioner "file" {
     content = <<EOF
 
-hostname: ${var.base_configuration["name_prefix"]}${var.name}${var.count > 1 ? "-${count.index  + 1}" : ""}
+hostname: ${var.name}${var.count > 1 ? "-${count.index  + 1}" : ""}
 domain: ${var.base_configuration["domain"]}
 use_avahi: ${var.base_configuration["use_avahi"]}
 additional_network: ${var.base_configuration["additional_network"]}
@@ -116,6 +116,6 @@ EOF
 output "configuration" {
   value {
     id = "${libvirt_domain.domain.0.id}"
-    hostname = "${var.base_configuration["name_prefix"]}${var.name}${var.count > 1 ? "-1" : ""}.${var.base_configuration["domain"]}"
+    hostname = "${var.name}${var.count > 1 ? "-1" : ""}.${var.base_configuration["domain"]}"
   }
 }
